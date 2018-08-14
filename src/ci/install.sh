@@ -10,6 +10,7 @@ case "${TEST_TYPE}" in
         exit 1
         ;;
     "ccm")
+        export LOCAL_JMX=no
         cp src/ci/jmxremote.password /home/travis/.local/jmxremote.password
         chmod 400 /home/travis/.local/jmxremote.password
         cat /usr/lib/jvm/java-8-oracle/jre/lib/management/jmxremote.access
@@ -37,8 +38,10 @@ case "${TEST_TYPE}" in
         sed -i 's/concurrent_writes: 32/concurrent_writes: 4/' /home/travis/.ccm/test/node2/conf/cassandra.yaml
         sed -i 's/concurrent_counter_writes: 32/concurrent_counter_writes: 4/' /home/travis/.ccm/test/node1/conf/cassandra.yaml
         sed -i 's/concurrent_counter_writes: 32/concurrent_counter_writes: 4/' /home/travis/.ccm/test/node2/conf/cassandra.yaml
-        sed -i 's/num_tokens: 256/num_tokens: 32/' /home/travis/.ccm/test/node1/conf/cassandra.yaml
-        sed -i 's/num_tokens: 256/num_tokens: 32/' /home/travis/.ccm/test/node2/conf/cassandra.yaml
+        sed -i 's/num_tokens: 256/num_tokens: 4/' /home/travis/.ccm/test/node1/conf/cassandra.yaml
+        sed -i 's/num_tokens: 256/num_tokens: 4/' /home/travis/.ccm/test/node2/conf/cassandra.yaml
+        echo 'phi_convict_threshold: 12' >> /home/travis/.ccm/test/node1/conf/cassandra.yaml
+        echo 'phi_convict_threshold: 12' >> /home/travis/.ccm/test/node2/conf/cassandra.yaml
         ;;
     *)
         echo "Skipping, no actions for TEST_TYPE=${TEST_TYPE}."
