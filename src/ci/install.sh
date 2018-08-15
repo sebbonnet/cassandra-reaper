@@ -40,8 +40,8 @@ case "${TEST_TYPE}" in
         sed -i 's/concurrent_counter_writes: 32/concurrent_counter_writes: 4/' /home/travis/.ccm/test/node2/conf/cassandra.yaml
         sed -i 's/num_tokens: 256/num_tokens: 4/' /home/travis/.ccm/test/node1/conf/cassandra.yaml
         sed -i 's/num_tokens: 256/num_tokens: 4/' /home/travis/.ccm/test/node2/conf/cassandra.yaml
-        echo 'phi_convict_threshold: 12' >> /home/travis/.ccm/test/node1/conf/cassandra.yaml
-        echo 'phi_convict_threshold: 12' >> /home/travis/.ccm/test/node2/conf/cassandra.yaml
+        echo 'phi_convict_threshold: 16' >> /home/travis/.ccm/test/node1/conf/cassandra.yaml
+        echo 'phi_convict_threshold: 16' >> /home/travis/.ccm/test/node2/conf/cassandra.yaml
         ;;
     *)
         echo "Skipping, no actions for TEST_TYPE=${TEST_TYPE}."

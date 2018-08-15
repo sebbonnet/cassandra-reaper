@@ -67,10 +67,10 @@ aliases:
                   sed -i 's/etc\/cassandra\/jmxremote.password/home\/circleci\/.local\/jmxremote.password/' /home/circleci/.ccm/test/node3/conf/cassandra-env.sh
                   sed -i 's/etc\/cassandra\/jmxremote.password/home\/circleci\/.local\/jmxremote.password/' /home/circleci/.ccm/test/node4/conf/cassandra-env.sh
                 fi
-                sed -i 's/#MAX_HEAP_SIZE="4G"/MAX_HEAP_SIZE="192m"/' /home/circleci/.ccm/test/node1/conf/cassandra-env.sh
-                sed -i 's/#MAX_HEAP_SIZE="4G"/MAX_HEAP_SIZE="192m"/' /home/circleci/.ccm/test/node2/conf/cassandra-env.sh
-                sed -i 's/#MAX_HEAP_SIZE="4G"/MAX_HEAP_SIZE="192m"/' /home/circleci/.ccm/test/node3/conf/cassandra-env.sh
-                sed -i 's/#MAX_HEAP_SIZE="4G"/MAX_HEAP_SIZE="192m"/' /home/circleci/.ccm/test/node4/conf/cassandra-env.sh
+                sed -i 's/#MAX_HEAP_SIZE="4G"/MAX_HEAP_SIZE="256m"/' /home/circleci/.ccm/test/node1/conf/cassandra-env.sh
+                sed -i 's/#MAX_HEAP_SIZE="4G"/MAX_HEAP_SIZE="256m"/' /home/circleci/.ccm/test/node2/conf/cassandra-env.sh
+                sed -i 's/#MAX_HEAP_SIZE="4G"/MAX_HEAP_SIZE="256m"/' /home/circleci/.ccm/test/node3/conf/cassandra-env.sh
+                sed -i 's/#MAX_HEAP_SIZE="4G"/MAX_HEAP_SIZE="256m"/' /home/circleci/.ccm/test/node4/conf/cassandra-env.sh
                 sed -i 's/#HEAP_NEWSIZE="800M"/HEAP_NEWSIZE="100M"/' /home/circleci/.ccm/test/node1/conf/cassandra-env.sh
                 sed -i 's/#HEAP_NEWSIZE="800M"/HEAP_NEWSIZE="100M"/' /home/circleci/.ccm/test/node2/conf/cassandra-env.sh
                 sed -i 's/#HEAP_NEWSIZE="800M"/HEAP_NEWSIZE="100M"/' /home/circleci/.ccm/test/node3/conf/cassandra-env.sh
@@ -103,10 +103,10 @@ aliases:
                 sed -i 's/num_tokens: 256/num_tokens: 4/' /home/circleci/.ccm/test/node2/conf/cassandra.yaml
                 sed -i 's/num_tokens: 256/num_tokens: 4/' /home/circleci/.ccm/test/node3/conf/cassandra.yaml
                 sed -i 's/num_tokens: 256/num_tokens: 4/' /home/circleci/.ccm/test/node4/conf/cassandra.yaml
-                echo 'phi_convict_threshold: 12' >> /home/circleci/.ccm/test/node1/conf/cassandra.yaml
-                echo 'phi_convict_threshold: 12' >> /home/circleci/.ccm/test/node2/conf/cassandra.yaml
-                echo 'phi_convict_threshold: 12' >> /home/circleci/.ccm/test/node3/conf/cassandra.yaml
-                echo 'phi_convict_threshold: 12' >> /home/circleci/.ccm/test/node4/conf/cassandra.yaml
+                echo 'phi_convict_threshold: 16' >> /home/circleci/.ccm/test/node1/conf/cassandra.yaml
+                echo 'phi_convict_threshold: 16' >> /home/circleci/.ccm/test/node2/conf/cassandra.yaml
+                echo 'phi_convict_threshold: 16' >> /home/circleci/.ccm/test/node3/conf/cassandra.yaml
+                echo 'phi_convict_threshold: 16' >> /home/circleci/.ccm/test/node4/conf/cassandra.yaml
                 # switch Cassandra-4.0 to G1GC (works better on small heap, ironically)
                 cp src/ci/jvm8-server.options /home/circleci/.ccm/test/node1/conf/
                 cp src/ci/jvm8-server.options /home/circleci/.ccm/test/node2/conf/
