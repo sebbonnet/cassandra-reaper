@@ -209,6 +209,16 @@ public final class ReaperApplication extends Application<ReaperApplicationConfig
       context.jmxConnectionFactory.setJmxCredentials(jmxCredentials);
     }
 
+    // Enable cross-origin requests for using external GUI applications.
+    if (config.isEnableCrossOrigin() || System.getProperty("enableCrossOrigin") != null) {
+      final FilterRegistration.Dynamic cors
+          = environment.servlets().addFilter("crossOriginRequests", CrossOriginFilter.class);
+      cors.setInitParameter("allowedOrigins", "*");
+      cors.setInitParameter("allowedHeaders", "X-Requested-With,Content-Type,Accept,Origin");
+      cors.setInitParameter("allowedMethods", "OPTIONS,GET,PUT,POST,DELETE,HEAD");
+      cors.addMappingForUrlPatterns(EnumSet.allOf(DispatcherType.class), true, "/*");
+    }
+
     setupSse(environment);
 
     LOG.info("creating and registering health checks");
@@ -240,16 +250,6 @@ public final class ReaperApplication extends Application<ReaperApplicationConfig
     environment.jersey().register(eventsResource);
     final DiagEventSseResource diagEvents = new DiagEventSseResource(context, httpClient);
     environment.jersey().register(diagEvents);
-
-    // Enable cross-origin requests for using external GUI applications.
-    if (config.isEnableCrossOrigin() || System.getProperty("enableCrossOrigin") != null) {
-      final FilterRegistration.Dynamic cors
-          = environment.servlets().addFilter("crossOriginRequests", CrossOriginFilter.class);
-      cors.setInitParameter("allowedOrigins", "*");
-      cors.setInitParameter("allowedHeaders", "X-Requested-With,Content-Type,Accept,Origin");
-      cors.setInitParameter("allowedMethods", "OPTIONS,GET,PUT,POST,DELETE,HEAD");
-      cors.addMappingForUrlPatterns(EnumSet.allOf(DispatcherType.class), true, "/*");
-    }
 
     if (config.isAccessControlEnabled()) {
       SessionHandler sessionHandler = new SessionHandler();
